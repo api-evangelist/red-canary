@@ -1,0 +1,70 @@
+generated: '2026-08-05'
+method: searched
+source: openapi/ has no spec — derived from the provider's own published documentation
+docs: https://docs.redcanary.com/docs/red-canary-rest-api
+notes: >-
+  No OpenAPI document is publicly reachable, so this profile is read from Red Canary's
+  public REST API documentation and from its own first-party Python client
+  (https://github.com/redcanaryco/openapi), not from a securitySchemes block.
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  oauth2_flows: []
+schemes:
+- name: X-Api-Key
+  type: apiKey
+  in: header
+  parameter_name: X-Api-Key
+  description: >-
+    Per-user API authentication token. Generated from the Red Canary portal under the
+    user profile -> Security Settings -> "Generate API Authentication Token". The token
+    inherits the roles/permissions of the user who created it, so API authorization is
+    role-based rather than scope-based.
+  sources:
+  - https://docs.redcanary.com/docs/red-canary-rest-api
+  - https://github.com/redcanaryco/openapi/blob/master/python/redcanary/rest.py
+token_management:
+  scope: per-user
+  rotation: >-
+    Generating a new token revokes any existing token for that user. Red Canary advises
+    periodic rotation.
+  docs: https://docs.redcanary.com/docs/rest-api-faq
+  revocation: implicit on regeneration
+tenancy:
+  model: subdomain
+  host_template: https://<subdomain>.my.redcanary.co/openapi/v3/
+  note: >-
+    Every API call is bound to the customer's own portal subdomain; there is no shared
+    global API host. https://go.my.redcanary.co/ is the subdomain selector / login gate.
+portal_authentication:
+  note: >-
+    Human access to the portal (where the Swagger reference lives) is separate from API
+    token auth and supports SAML SSO and MFA.
+  sso:
+  - provider: Microsoft Entra ID
+    docs: https://docs.redcanary.com/docs/set-up-single-sign-on-to-microsoft-entra-id
+  - provider: Okta
+    docs: https://docs.redcanary.com/docs/set-up-single-sign-on-to-okta
+  - provider: OneLogin
+    docs: https://docs.redcanary.com/docs/set-up-single-sign-on-to-onelogin
+  - provider: Ping Identity
+    docs: https://docs.redcanary.com/docs/set-up-single-sign-on-to-ping-identity
+  mfa_docs: https://docs.redcanary.com/docs/configure-multi-factor-authentication-mfa
+oauth:
+  present: false
+  note: >-
+    The REST API declares no OAuth 2.0 or OpenID Connect surface. No
+    /.well-known/oauth-authorization-server or /.well-known/openid-configuration is
+    served on any Red Canary host (all 404; see well-known/red-canary-well-known.yml).
+    scopes/ is therefore intentionally absent.
+x-evidence:
+  fetched: '2026-08-05'
+  urls:
+  - url: https://docs.redcanary.com/docs/red-canary-rest-api.md
+    http_status: 200
+  - url: https://docs.redcanary.com/docs/rest-api-faq.md
+    http_status: 200
+  - url: https://raw.githubusercontent.com/redcanaryco/openapi/master/python/redcanary/rest.py
+    http_status: 200

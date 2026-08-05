@@ -1,0 +1,125 @@
+generated: '2026-08-05'
+method: searched
+source: https://docs.redcanary.com/docs/red-canary-rest-api
+docs:
+- https://docs.redcanary.com/docs/red-canary-rest-api
+- https://docs.redcanary.com/docs/rest-api-faq
+- https://docs.redcanary.com/docs/quickstart-curl
+api: Red Canary REST API v3
+authentication:
+  style: api-key-header
+  header: X-Api-Key
+  detail: authentication/red-canary-authentication.yml
+versioning:
+  scheme: uri-path
+  current: v3
+  path_segment: /openapi/v3/
+  breaking_change_policy: >-
+    Red Canary describes additive REST API changes as backwards compatible in its
+    release notes ("These changes are backwards compatible and any existing API calls
+    will automatically contain the newly-supported information", March 2026). No formal
+    written versioning or sunset policy for the API itself is published; feature-level
+    stages are governed by the Release Stages page.
+  detail: lifecycle/red-canary-lifecycle.yml
+pagination:
+  style: page-number
+  parameters:
+  - name: page
+    description: 1-indexed page number
+  - name: per_page
+    description: items per page (client default in the first-party Python client is 50)
+  - name: direction
+    description: sort direction
+  response_fields:
+    meta:
+    - api_version
+    - total_items
+    links:
+    - self
+    - first
+    - prev
+    - next
+    - count
+    data: array of resource objects
+  note: >-
+    The first-party Python client pages by incrementing `page` until the accumulated
+    item count equals meta.total_items.
+response_envelope:
+  style: json-api-flavored
+  shape:
+    meta: API version and total item count
+    links: navigation URLs (self, first, prev, next, count)
+    data: array of objects, each with type, id, attributes, relationships and links
+  example_resource_object:
+    type: Detection
+    id: integer
+    attributes: object
+    relationships: 'object keyed by relationship name, each with links.related and data.type + data.id'
+    links: 'object keyed by link name, each with an href'
+  source: https://github.com/redcanaryco/openapi/blob/master/python/test/data/detection.json
+idempotency:
+  supported: false
+  note: >-
+    Red Canary documents no idempotency key, no Idempotency-Key header, and no retry
+    de-duplication contract. Write operations observed in the first-party client
+    (mark_acknowledged, update_remediation_state) are PATCH state transitions, which are
+    naturally idempotent by shape, but the provider makes no idempotency guarantee. No
+    Idempotency pointer is wired in apis.yml.
+rate_limits:
+  documented: true
+  per: ip-address
+  limits:
+  - window: 1 minute
+    max_requests: 20
+  - window: 1 second
+    max_requests: 10
+  exceeded_status:
+  - 429
+  - 406
+  headers_published: false
+  note: >-
+    Red Canary publishes the numeric limits in prose but documents no RateLimit-*
+    or Retry-After response headers, so an agent cannot read remaining budget from a
+    response.
+  source: https://docs.redcanary.com/docs/rest-api-faq
+filtering:
+  time_range: >-
+    Resources support a `since` parameter taking an ISO 8601 timestamp
+    (example from the first-party client: 2018-07-12T12:15:20Z) to limit results
+    to a date/time range where relevant.
+  source: https://github.com/redcanaryco/openapi/blob/master/python/redcanary/detections.py
+field_expansion:
+  supported: false
+  note: >-
+    No expand/include/sparse-fieldset parameter is documented. Related resources are
+    reached by following the hrefs under `relationships` and `links` (e.g.
+    /detections/{id}/detectors, /detections/{id}/timeline).
+metadata:
+  custom_fields: not documented
+request_tracing:
+  request_id_header: not documented
+errors:
+  envelope: not published as a structured schema
+  problem_json: false
+  detail: errors/red-canary-problem-types.yml
+webhooks:
+  consumer_subscribable: false
+  note: >-
+    Red Canary delivers outbound notifications from automation playbooks into
+    customer-supplied endpoints (Microsoft Teams incoming webhook, PagerDuty, Opsgenie,
+    email/SMTP, Microsoft Sentinel via the Logs Ingestion API), and bulk telemetry via
+    the Canary Exporter container to S3 / Kinesis / Azure Blob / GCS. There is no
+    published event catalog, payload schema, or subscribe API, so no AsyncAPI or
+    Webhooks artifact is emitted.
+  sources:
+  - https://docs.redcanary.com/docs/add-response-actions
+  - https://docs.redcanary.com/docs/export-data-from-red-canary
+x-evidence:
+  fetched: '2026-08-05'
+  urls:
+  - url: https://docs.redcanary.com/docs/red-canary-rest-api.md
+    http_status: 200
+  - url: https://docs.redcanary.com/docs/rest-api-faq.md
+    http_status: 200
+  - url: https://docs.redcanary.com/docs/quickstart-curl.md
+    http_status: 200

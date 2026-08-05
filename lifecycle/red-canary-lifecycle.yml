@@ -1,0 +1,91 @@
+generated: '2026-08-05'
+method: searched
+source: https://docs.redcanary.com/docs/red-canary-release-stages
+versioning:
+  scheme: uri-path
+  current: v3
+  path: /openapi/v3/
+  docs: https://docs.redcanary.com/docs/red-canary-rest-api
+  policy_published: false
+  note: >-
+    The API version is pinned in the path (openapi/v3). Red Canary describes REST API
+    changes as additive and backwards compatible in its release notes but publishes no
+    written API versioning or migration policy.
+deprecation:
+  policy_url: https://docs.redcanary.com/docs/red-canary-release-stages
+  sunset_header: false
+  rfc8594: false
+  scope: product-and-feature
+  stages:
+  - name: BETA Feature
+    support: false
+    feature_complete: false
+    access: by invite only
+    guaranteed_ga: false
+  - name: Design Partnership
+    support: false
+    feature_complete: false
+    access: by invite only
+    guaranteed_ga: false
+  - name: Early Access (EA)
+    support: false
+    feature_complete: false
+    access: by invite only
+    guaranteed_ga: true
+  - name: Limited Access
+    support: true
+    feature_complete: true
+    access: by invite only
+    guaranteed_ga: true
+  - name: General Availability (GA)
+    support: true
+    feature_complete: true
+    access: all licensed users
+  - name: Deprecated
+    support: true
+    access: existing users
+  - name: End-of-Life
+    support: false
+    access: existing users
+  note: >-
+    Red Canary publishes a formal release-stage ladder that includes explicit
+    Deprecated and End-of-Life stages with defined support posture. Deprecations are
+    announced in the release notes (example: "Microsoft Security Copilot Plugin
+    Deprecated", April 2026). No Sunset or Deprecation HTTP response headers are
+    documented on the REST API.
+status_page: https://status.redcanary.com/
+status_page_platform: Atlassian Statuspage
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No public SLA or uptime commitment is published; service commitments sit behind the
+    license agreements at https://redcanary.com/license-agreements/.
+data_retention:
+  docs: https://docs.redcanary.com/docs/data-retention-policy
+release_notes:
+  product: https://docs.redcanary.com/docs/red-canary-release-notes
+  linux_edr_sensor: https://docs.redcanary.com/docs/linux-edr-sensor-release-notes
+  detail: changelog/red-canary-changelog.yml
+deprecated_operations: []
+deprecated_operations_note: >-
+  Cannot be derived — no public OpenAPI document exists to read `deprecated: true` from.
+corporate:
+  acquired_by: Zscaler
+  year: 2025
+  note: >-
+    redcanary.com/careers/ now 302s to zscaler.com/careers, and Red Canary product
+    release notes reference joint Zscaler capabilities (Zscaler OneAPI integration, ZIA
+    response actions). The Red Canary brand, docs host and API remain live.
+x-evidence:
+  fetched: '2026-08-05'
+  urls:
+  - url: https://docs.redcanary.com/docs/red-canary-release-stages.md
+    http_status: 200
+  - url: https://docs.redcanary.com/docs/red-canary-release-notes.md
+    http_status: 200
+  - url: https://status.redcanary.com/
+    http_status: 200
+  - url: https://redcanary.com/careers/
+    http_status: 200
+    note: 302 to https://www.zscaler.com/careers

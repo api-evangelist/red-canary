@@ -1,0 +1,72 @@
+generated: '2026-08-05'
+method: searched
+source: https://docs.redcanary.com/docs/red-canary-aws-resource-discovery-tool
+scope_note: >-
+  Red Canary ships no CLI that wraps its REST API — there is no `redcanary` command
+  for detections, threats or endpoints, and the REST API FAQ states no SDKs are
+  provided. What it does publish and document are first-party command-line tools for
+  cloud discovery and telemetry export. Those are recorded here; do not read this
+  artifact as an API-management CLI.
+tools:
+- name: Red Canary AWS Resource Discovery Tool
+  binary: enumerate-resources
+  language: go
+  docs: https://docs.redcanary.com/docs/red-canary-aws-resource-discovery-tool
+  source: https://github.com/redcanaryco/red-canary-aws-resource-discovery
+  official: true
+  install:
+  - method: prebuilt-binary
+    url: https://rc-customer-tools.s3.us-east-2.amazonaws.com/aws/enumerate-resources
+  - method: build-from-source
+    command: git clone https://github.com/redcanaryco/red-canary-aws-resource-discovery && cd red-canary-aws-resource-discovery && go mod tidy
+  runtime: AWS CloudShell (officially supported environment)
+  purpose: >-
+    Scans an AWS account or Organization and counts the resources Red Canary would
+    monitor, for scoping and billing estimation.
+  configuration:
+  - env: AWS_PROFILE
+    description: select a different AWS profile/account to scan
+  prerequisites:
+  - AWS credentials with read-only access (SecurityAudit managed policy is sufficient)
+  - CloudFormation stack from red-canary-resource-discovery-role.yaml to create the discovery role
+- name: GCP Resource Discovery Tool
+  docs: https://docs.redcanary.com/docs/gcp-resource-discovery-tool
+  official: true
+  purpose: Google Cloud Platform equivalent of the AWS resource discovery tool.
+- name: Azure Resource Discovery Tool
+  docs: https://docs.redcanary.com/docs/azure-resource-discovery-tool
+  official: true
+  purpose: Microsoft Azure equivalent of the AWS resource discovery tool.
+- name: Canary Exporter
+  docs: https://docs.redcanary.com/docs/export-data-from-red-canary
+  official: true
+  packaging: docker-container
+  purpose: >-
+    Pulls collected telemetry out of Red Canary and writes it to a chosen destination.
+  outputs:
+  - local file
+  - AWS S3
+  - AWS Kinesis
+  - Azure Blob Storage
+  - Google Cloud Storage
+  formats:
+  - native (original EDR/EPP product format)
+  - standardized (Red Canary uniform structure)
+  - cf-flattened (Linux EDR only)
+  requirements:
+  - Docker (Community Edition sufficient)
+  - 4GB memory
+  - network connectivity to AWS SQS and S3
+  - Red Canary credentials; enablement requires the customer's CMS or account team
+  note: >-
+    One exporter deployment reads one queue; a Red Canary API token can be injected so
+    the exporter enriches records with endpoint metadata from the portal.
+x-evidence:
+  fetched: '2026-08-05'
+  urls:
+  - url: https://docs.redcanary.com/docs/red-canary-aws-resource-discovery-tool.md
+    http_status: 200
+  - url: https://raw.githubusercontent.com/redcanaryco/red-canary-aws-resource-discovery/main/README.md
+    http_status: 200
+  - url: https://docs.redcanary.com/docs/export-data-from-red-canary.md
+    http_status: 200

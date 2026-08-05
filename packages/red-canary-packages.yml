@@ -1,0 +1,63 @@
+generated: '2026-08-05'
+method: searched
+source: https://github.com/redcanaryco/openapi
+notes: >-
+  Red Canary publishes ONE first-party API client library, and it ships from GitHub
+  source only — it is not on PyPI, npm, RubyGems, Maven Central, NuGet, pkg.go.dev,
+  Packagist or crates.io (all probed 2026-08-05, all 404). The REST API FAQ states
+  plainly that no packaged SDKs are provided; the docs instead publish copy-paste
+  quickstarts in Python, Ruby, Go, curl and PowerShell.
+packages:
+- language: python
+  registry: github
+  name: redcanary
+  version: '0.4'
+  url: https://github.com/redcanaryco/openapi
+  install: git clone https://github.com/redcanaryco/openapi && cd openapi/python && python setup.py install
+  license: MIT
+  official: true
+  maintainer_email: opensource@redcanary.com
+  covers:
+  - detections
+  - detectors
+  note: >-
+    Wraps https://<subdomain>.my.redcanary.co/openapi/v3/ with X-Api-Key auth and
+    automatic page-through of the meta.total_items envelope. Configured with the
+    RED_CANARY_CUSTOMER_ID and RED_CANARY_AUTH_TOKEN environment variables.
+registry_probes:
+- registry: pypi
+  query: redcanary
+  status: 404
+- registry: npm
+  query: redcanary
+  status: 404
+- registry: npm
+  query: red-canary
+  status: 404
+- registry: rubygems
+  query: redcanary
+  status: 404
+- registry: pkg.go.dev
+  query: github.com/redcanaryco/openapi
+  status: 404
+code_examples:
+- language: python
+  url: https://docs.redcanary.com/docs/quickstart-python
+- language: ruby
+  url: https://docs.redcanary.com/docs/quickstart-ruby
+- language: go
+  url: https://docs.redcanary.com/docs/quickstart-go
+- language: curl
+  url: https://docs.redcanary.com/docs/quickstart-curl
+- language: powershell
+  url: https://docs.redcanary.com/docs/quickstart-powershell
+related_open_source:
+- name: atomic-red-team
+  url: https://github.com/redcanaryco/atomic-red-team
+  note: adversary emulation test library; not an API client
+- name: chain-reactor
+  url: https://github.com/redcanaryco/chain-reactor
+  note: adversary simulation framework; not an API client
+- name: surveyor
+  url: https://github.com/redcanaryco/surveyor
+  note: cross-platform threat hunting tool; queries third-party EDR APIs, not Red Canary's

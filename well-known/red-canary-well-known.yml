@@ -1,0 +1,125 @@
+generated: '2026-08-05'
+method: probed
+source: live HTTP probe of every Red Canary host found in apis.yml
+notes: >-
+  go.my.redcanary.co answers HTTP 200 with the same "Enter your subdomain to continue"
+  HTML page for EVERY path, including every /.well-known/* path and a deliberate
+  control path (/zzz-nonexistent-kin-control-path). Those 200s are a soft-404 catch-all,
+  not published discovery documents, and are recorded as false_positive below.
+  Red Canary itself publishes no /.well-known/security.txt on any host it controls.
+hosts:
+- host: https://redcanary.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 200
+    content_type: text/plain
+    file: ../llms/red-canary-llms.txt
+- host: https://docs.redcanary.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 200
+    content_type: text/plain
+    file: ../llms/red-canary-docs-llms.txt
+- host: https://go.my.redcanary.co
+  note: >-
+    Subdomain-selector gate. Every path returns 200 with an identical HTML form
+    ("Enter your subdomain to continue"); only the CSRF token and the hidden
+    original_path field differ from a control path. No document below is real.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    false_positive: true
+    content_type: text/html
+  - path: /.well-known/agent-card.json
+    status: 200
+    false_positive: true
+    content_type: text/html
+  - path: /.well-known/agent.json
+    status: 200
+    false_positive: true
+    content_type: text/html
+  - path: /.well-known/openid-configuration
+    status: 200
+    false_positive: true
+    content_type: text/html
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    false_positive: true
+    content_type: text/html
+  - path: /.well-known/api-catalog
+    status: 200
+    false_positive: true
+    content_type: text/html
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    false_positive: true
+    content_type: text/html
+  - path: /zzz-nonexistent-kin-control-path
+    status: 200
+    false_positive: true
+    content_type: text/html
+    note: control path proving the catch-all
+- host: https://status.redcanary.com
+  note: >-
+    Atlassian Statuspage-hosted. The security.txt served here is Atlassian's
+    platform file (Canonical: https://www.atlassian.com/.well-known/security.txt),
+    NOT a Red Canary document. Saved verbatim for the record but it is not credited
+    to Red Canary and no SecurityTxt pointer is wired from it.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/plain
+    file: red-canary-status-host-security.txt
+    owner: Atlassian (Statuspage platform)
+    attributable_to_provider: false
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+- host: https://support.redcanary.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+x-evidence:
+  checked: '2026-08-05'
+  method: curl -s -o /dev/null -w '%{http_code} %{content_type}' -L

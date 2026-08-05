@@ -1,0 +1,52 @@
+generated: '2026-08-05'
+method: searched
+source: https://docs.redcanary.com/docs/red-canary-release-notes
+scheme: dated-monthly
+format: prose release notes grouped by month, no semantic version for the platform
+current_api_version: v3
+page_last_updated: '2026-06-04'
+window: recent (2026-03 .. 2026-05); full history remains on the live page
+notes: >-
+  Red Canary publishes a dated product release-notes page plus a separate Linux EDR
+  sensor release-notes page. Entries are feature-level prose, not versioned API
+  changesets; API-affecting entries are called out explicitly below.
+entries:
+- date: '2026-05'
+  breaking: false
+  api_affecting: false
+  highlights:
+  - Security Data Lake data profiling for tables (data dictionary in Table Explorer).
+  - Enhanced Substantive Updates to Threats, with timeline UI showing changed properties.
+  - Related Data Insights for ZIA investigations rendered as yes/no questions.
+  - New "Invasive Application" sub-classification under Malicious Software.
+- date: '2026-04'
+  breaking: false
+  api_affecting: false
+  deprecations:
+  - Microsoft Security Copilot plugin retired; documentation removed from Red Canary and Microsoft sites.
+  highlights:
+  - Identity license counts for Entra ID now exclude inactive users.
+  - New Agents section in the portal with AI agent directory, job descriptions and execution history.
+  - Response Actions for Zscaler Internet Access (block IPs, URLs, domains, files).
+  - Windows 10 endpoints flagged End of Life (`end_of_life_operating_system:true`).
+  - More granular provider classification for Cortex alerts.
+- date: '2026-03'
+  breaking: false
+  api_affecting: true
+  additions:
+  - 'REST API: new data added to /detections, /events, /endpoints and /endpoint_users responses — described by Red Canary as backwards compatible.'
+  - 'API documentation: "Copy to clipboard" for request paths and an interactive "Try it out" feature in the Swagger reference.'
+  highlights:
+  - Security Data Lake tabbed searches (search page moved from /lake/search to /lake/tabs).
+  - Inferred suggestions for Customizations (agentic tuning) with a Needs Review tab.
+  - Entra ID Suspend User response action now remediates at the Domain Controller level.
+  - New Threat Recommendation Agent adds prioritized remediation steps to the timeline.
+  - Selective isolation response action for Microsoft Defender for Endpoint.
+related:
+  release_stages: https://docs.redcanary.com/docs/red-canary-release-stages
+  linux_edr_sensor_release_notes: https://docs.redcanary.com/docs/linux-edr-sensor-release-notes
+x-evidence:
+  fetched: '2026-08-05'
+  urls:
+  - url: https://docs.redcanary.com/docs/red-canary-release-notes.md
+    http_status: 200

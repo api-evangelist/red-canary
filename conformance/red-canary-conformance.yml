@@ -1,0 +1,90 @@
+generated: '2026-08-05'
+method: searched
+source: https://redcanary.com/trust-center/
+docs:
+- https://redcanary.com/trust-center/
+- https://docs.redcanary.com/docs/supported-standards-and-frameworks
+- https://docs.redcanary.com/docs/red-canary-rest-api
+notes: >-
+  Two distinct things are recorded here and must not be conflated. (1) API / protocol
+  conformance, read from Red Canary's public REST API documentation — no OpenAPI is
+  publicly reachable, so nothing is derived from a spec. (2) The organization's own
+  published certifications and the compliance-control mappings it publishes for
+  customers' auditors.
+standards:
+- id: oauth2
+  conforms: false
+  evidence: REST API authenticates with a static per-user X-Api-Key header; no OAuth 2.0 surface documented and no /.well-known/oauth-authorization-server on any host.
+- id: oidc
+  conforms: false
+  evidence: No /.well-known/openid-configuration on any Red Canary host (404 on redcanary.com, docs.redcanary.com, support.redcanary.com).
+- id: saml-2.0
+  conforms: true
+  scope: portal-sso-only
+  evidence: Documented SAML SSO setup for Microsoft Entra ID, Okta, OneLogin and Ping Identity. This is human portal login, not API authorization.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Error responses are plain JSON keyed on HTTP status; no application/problem+json documented.
+- id: json-api
+  conforms: partial
+  evidence: 'Responses use a JSON:API-flavored envelope (meta / links / data, resource objects with type, id, attributes, relationships, links) but Red Canary makes no JSON:API conformance claim and does not use the application/vnd.api+json media type.'
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: No /.well-known/security.txt served on any Red Canary-controlled host (the 200 on status.redcanary.com belongs to Atlassian Statuspage).
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation response headers documented; deprecation is announced in release notes and governed by the Release Stages ladder.
+- id: openapi
+  conforms: unknown
+  evidence: >-
+    Red Canary states its API is "fully documented in standard OpenAPI Swagger UI format"
+    and serves it at /openapi/v3/docs/index.html inside the tenant portal, but the
+    document is not publicly reachable — go.my.redcanary.co returns a subdomain gate for
+    every path. Presence of an OpenAPI document is claimed by the provider and cannot be
+    verified anonymously.
+- id: mitre-attack
+  conforms: true
+  evidence: >-
+    Detector objects carry attack_technique_identifiers mapping detections to MITRE
+    ATT&CK techniques; Red Canary publishes the ATT&CK-based Threat Detection Report and
+    maintains Atomic Red Team.
+certifications:
+  published: true
+  url: https://redcanary.com/trust-center/
+  contact: grc@redcanary.com
+  items:
+  - name: SOC 2 Type II
+  - name: ISO 27001:2013
+  - name: ISO 27701
+  - name: JOSCAR
+    note: Joint Supply Chain Accreditation Register (aerospace, defense and security industry)
+  - name: EU-U.S. / UK / Swiss Data Privacy Framework
+    note: certified under the U.S. Department of Commerce Data Privacy Framework Program
+  privacy_agreements:
+  - Data Protection Addendum covering GDPR, UK GDPR, CCPA, CPRA, PIPEDA, FDPA
+  subprocessor_list: available to customers and prospects under NDA via grc@redcanary.com
+customer_control_mappings:
+  url: https://docs.redcanary.com/docs/supported-standards-and-frameworks
+  note: >-
+    Red Canary publishes a control-family table mapping how its monitoring supports
+    customer compliance obligations. These are frameworks Red Canary helps customers
+    satisfy — NOT certifications Red Canary itself holds.
+  frameworks:
+  - ISO 27001:2013
+  - SOC
+  - FedRAMP
+  - PCI DSS
+  - BSI C5
+  - HIPAA
+  - NIST 800-171
+  - CMMC
+x-evidence:
+  fetched: '2026-08-05'
+  urls:
+  - url: https://redcanary.com/trust-center/
+    http_status: 200
+  - url: https://docs.redcanary.com/docs/supported-standards-and-frameworks.md
+    http_status: 200
+  - url: https://go.my.redcanary.co/openapi/v3/docs/index.html
+    http_status: 200
+    note: 200 is the subdomain-selector gate page, not the Swagger UI

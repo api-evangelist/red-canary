@@ -1,18 +1,66 @@
 aid: red-canary
 name: Red Canary
-description: 'Red Canary is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Red Canary is a Managed Detection and Response (MDR) provider that monitors
+  endpoint, identity, cloud, email and network telemetry on behalf of its customers,
+  confirms threats with a 24x7 human and AI detection engineering team, and drives
+  containment through automation playbooks and response actions across partner platforms
+  such as Microsoft Defender, CrowdStrike Falcon, SentinelOne, Palo Alto Cortex, Carbon
+  Black and Zscaler. The company also publishes widely used open-source security research
+  including Atomic Red Team, Chain Reactor, Surveyor and the annual Threat Detection
+  Report. Red Canary was acquired by Zscaler in 2025. It operates a tenant-scoped REST
+  API (openapi/v3) over detections, threats, events, endpoints, endpoint users, identities,
+  investigations and audit logs, authenticated with a per-user X-Api-Key token; the
+  Swagger/OpenAPI reference for that API is served inside the customer portal and is
+  not reachable without a tenant subdomain and login.'
+image: https://redcanary.com/wp-content/uploads/2025/08/Open-Graph-2025-1200x628-1.jpg
 url: https://raw.githubusercontent.com/api-evangelist/red-canary/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-05'
 modified: '2026-08-05'
 tags:
 - Company
-apis: []
+- Security
+- Cybersecurity
+- Managed Detection and Response
+- Threat Detection
+- Threat Intelligence
+- Endpoint Security
+- Incident Response
+- Security Operations
+- Automation
+apis:
+- name: Red Canary REST API v3
+  description: 'Tenant-scoped REST API over the Red Canary portal. Documented resources
+    include detections, threats, events, endpoints, endpoint_users, identities, investigations
+    and audit_logs. Requests carry a per-user API token in the X-Api-Key header. Responses
+    use a JSON:API-flavored envelope of meta / links / data, with page, per_page and
+    direction pagination parameters. Rate limited to roughly 20 requests per minute
+    and 10 requests per second per IP address.'
+  humanURL: https://docs.redcanary.com/docs/red-canary-rest-api
+  baseURL: https://go.my.redcanary.co/openapi/v3/
+  x-base-url-template: https://<subdomain>.my.redcanary.co/openapi/v3/
+  tags:
+  - Security
+  - Threat Detection
+  - Endpoint Security
+  - Incident Response
+  properties:
+  - type: Documentation
+    url: https://docs.redcanary.com/docs/red-canary-rest-api
+  - type: APIReference
+    url: https://go.my.redcanary.co/openapi/v3/docs/index.html
+  - type: GettingStarted
+    url: https://docs.redcanary.com/docs/red-canary-rest-api
+  - type: Authentication
+    url: authentication/red-canary-authentication.yml
+  - type: ErrorCatalog
+    url: errors/red-canary-problem-types.yml
+  - type: Conventions
+    url: conventions/red-canary-conventions.yml
+  - type: DataModel
+    url: data-model/red-canary-data-model.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +68,71 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://forgeglobal.com/red-canary_stock/
+  url: https://redcanary.com/
+- type: DeveloperPortal
+  url: https://docs.redcanary.com/
+- type: Documentation
+  url: https://docs.redcanary.com/docs/red-canary-getting-started
+- type: APIReference
+  url: https://go.my.redcanary.co/openapi/v3/docs/index.html
+- type: GettingStarted
+  url: https://docs.redcanary.com/docs/red-canary-rest-api
+- type: Support
+  url: https://support.redcanary.com/hc/en-us
+- type: HelpCenter
+  url: https://docs.redcanary.com/docs/getting-help
+- type: Blog
+  url: https://redcanary.com/blog/
+- type: GitHubOrganization
+  url: https://github.com/redcanaryco
+- type: Login
+  url: https://go.my.redcanary.co/
+- type: TermsOfService
+  url: https://redcanary.com/license-agreements/
+- type: PrivacyPolicy
+  url: https://redcanary.com/privacy-policy/
+- type: StatusPage
+  url: https://status.redcanary.com/
+- type: Security
+  url: https://redcanary.com/responsible-disclosure/
+- type: TrustCenter
+  url: security/red-canary-trust-center.yml
+- type: Compliance
+  url: https://redcanary.com/trust-center/
+- type: ChangeLog
+  url: https://docs.redcanary.com/docs/red-canary-release-notes
+- type: Packages
+  url: packages/red-canary-packages.yml
+- type: SDKs
+  url: packages/red-canary-packages.yml
+- type: WellKnown
+  url: well-known/red-canary-well-known.yml
+- type: LLMsTxt
+  url: llms/red-canary-llms.txt
+- type: Authentication
+  url: authentication/red-canary-authentication.yml
+- type: Conventions
+  url: conventions/red-canary-conventions.yml
+- type: ErrorCatalog
+  url: errors/red-canary-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/red-canary-lifecycle.yml
+- type: Deprecation
+  url: https://docs.redcanary.com/docs/red-canary-release-stages
+- type: Conformance
+  url: conformance/red-canary-conformance.yml
+- type: DomainSecurity
+  url: security/red-canary-domain-security.yml
+- type: VulnerabilityDisclosure
+  url: security/red-canary-vulnerability-disclosure.yml
+- type: DataModel
+  url: data-model/red-canary-data-model.yml
+- type: CLI
+  url: cli/red-canary-cli.yml
+- type: ChangeLog
+  url: changelog/red-canary-changelog.yml
+x-enrichment:
+  date: '2026-08-05'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v1

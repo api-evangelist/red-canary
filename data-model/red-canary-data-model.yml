@@ -1,0 +1,143 @@
+generated: '2026-08-05'
+method: derived
+source: >-
+  https://github.com/redcanaryco/openapi — Red Canary's own published Python client and
+  its committed response fixtures (python/test/data/detection.json,
+  python/test/data/detector.json), plus the resource list in
+  https://docs.redcanary.com/docs/red-canary-rest-api
+derivation_note: >-
+  No public OpenAPI document exists, so this graph is NOT derived from spec $refs. It is
+  derived from first-party evidence only: the attribute accessors and API paths in Red
+  Canary's published client, and the real response objects committed as that client's
+  test fixtures. Entities and fields listed below appear verbatim in that evidence.
+  Resources named in the documentation but with no observed payload are marked
+  fields_observed: false and carry no invented fields.
+api: Red Canary REST API v3
+id_style: integer
+envelope: type / id / attributes / relationships / links
+entities:
+- name: Detection
+  path: /detections
+  fields_observed: true
+  attributes:
+  - headline
+  - confirmed_at
+  - summary
+  - severity
+  - last_activity_seen_at
+  - classification
+  - time_of_occurrence
+  - last_acknowledged_at
+  - last_acknowledged_by
+  - last_remediated_status
+  top_level_fields:
+  - hostname
+  - username
+  sub_objects:
+    classification:
+    - superclassification
+    - subclassification
+  state_transitions:
+  - path: /detections/{id}/mark_acknowledged
+    method: PATCH
+  - path: /detections/{id}/update_remediation_state
+    method: PATCH
+    parameters:
+    - remediation_state
+    - comment
+    enum:
+    - remediated
+    - not_remediated_false_positive
+    - not_remediated_sanctioned_activity
+    - not_remediated_unwarranted
+  sub_resources:
+  - /detections/{id}/timeline
+  - /detections/{id}/detectors
+  query_parameters:
+  - per_page
+  - since
+- name: Detector
+  path: /detections/{id}/detectors
+  fields_observed: true
+  attributes:
+  - name
+  - description
+  - contributing_intelligence
+  - attack_technique_identifiers
+  note: attack_technique_identifiers carries MITRE ATT&CK technique IDs.
+- name: Endpoint
+  path: /endpoints
+  fields_observed: false
+  note: >-
+    Referenced as a relationship target (relationships.affected_endpoint ->
+    /openapi/v3/endpoints/{id}) and listed as a resource in the docs. Attribute set not
+    publicly observable.
+- name: EndpointUser
+  path: /endpoint_users
+  fields_observed: false
+  note: >-
+    Referenced as a relationship target (relationships.related_endpoint_user ->
+    /openapi/v3/endpoint_users/{id}).
+- name: PortalUser
+  fields_observed: true
+  attributes:
+  - id
+  - email
+  - name
+  - name_and_email
+  note: Embedded object, appears as Detection.last_acknowledged_by. No standalone path observed.
+- name: Event
+  path: /events
+  fields_observed: false
+  note: Named in the docs and in the March 2026 release notes as a REST resource.
+- name: Identity
+  path: /identities
+  fields_observed: false
+  note: Named in the REST API documentation resource list.
+- name: Investigation
+  path: /investigations
+  fields_observed: false
+  note: Named in the REST API documentation resource list.
+- name: AuditLog
+  path: /audit_logs
+  fields_observed: false
+  note: >-
+    Named in the REST API FAQ for tracking historical changes; the FAQ notes only the
+    most recent record is retrievable for most queries.
+relationships:
+- from: Detection
+  to: Endpoint
+  type: has_one
+  via: relationships.affected_endpoint
+  link: /openapi/v3/endpoints/{id}
+- from: Detection
+  to: EndpointUser
+  type: has_one
+  via: relationships.related_endpoint_user
+  link: /openapi/v3/endpoint_users/{id}
+- from: Detection
+  to: Detector
+  type: has_many
+  via: links.detectors
+  link: /openapi/v3/detections/{id}/detectors
+- from: Detection
+  to: PortalUser
+  type: has_one
+  via: attributes.last_acknowledged_by
+  embedded: true
+- from: Detector
+  to: AttackTechnique
+  type: has_many
+  via: relationships.attack_techniques
+  external_vocabulary: MITRE ATT&CK
+x-evidence:
+  fetched: '2026-08-05'
+  urls:
+  - url: https://raw.githubusercontent.com/redcanaryco/openapi/master/python/test/data/detection.json
+    http_status: 200
+  - url: https://raw.githubusercontent.com/redcanaryco/openapi/master/python/test/data/detector.json
+    http_status: 200
+  - url: https://raw.githubusercontent.com/redcanaryco/openapi/master/python/redcanary/detections.py
+    http_status: 200
+  - url: https://docs.redcanary.com/docs/red-canary-rest-api.md
+    http_status: 200

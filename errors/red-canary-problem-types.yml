@@ -1,0 +1,69 @@
+generated: '2026-08-05'
+method: searched
+source: https://docs.redcanary.com/docs/red-canary-rest-api
+format: http-status
+notes: >-
+  Red Canary publishes no OpenAPI document publicly, so this catalog is taken from the
+  HTTP response-code table in its own "Getting Started with the Red Canary REST API"
+  documentation rather than derived from 4xx/5xx spec responses. Responses are plain
+  JSON; the API does NOT use RFC 9457 application/problem+json, and no machine-readable
+  error `type` URIs or error codes are published.
+api: Red Canary REST API v3
+envelope:
+  problem_json: false
+  content_type: application/json
+  structured_error_codes: false
+problems:
+- status: 200
+  title: Success
+  meaning: The request succeeded.
+- status: 400
+  title: Bad Request
+  meaning: The request was malformed or carried invalid parameters.
+  remediation: Correct the request path, query parameters, or body and retry.
+- status: 403
+  title: Forbidden
+  meaning: >-
+    Missing, invalid, or revoked API token, or the token's user lacks the role required
+    for the resource. Red Canary uses 403 rather than 401 for authentication failures.
+  remediation: >-
+    Regenerate the API token from the portal user profile and confirm the owning user
+    holds the role needed for that resource.
+- status: 404
+  title: Not Found
+  meaning: The requested resource or id does not exist in this tenant.
+- status: 405
+  title: Method Not Allowed
+  meaning: The HTTP method is not supported on that path.
+- status: 406
+  title: Not Acceptable
+  meaning: >-
+    Returned in place of 429 in some rate-limit conditions. Red Canary documents both
+    429 and 406 as the rate-limit outcome.
+  remediation: Back off to within 20 requests/minute and 10 requests/second per IP.
+- status: 429
+  title: Too Many Requests
+  meaning: Rate limit exceeded (20 requests per minute, 10 requests per second, per IP).
+  remediation: >-
+    Back off and retry. No Retry-After or RateLimit-* headers are documented, so the
+    client must apply its own backoff.
+- status: 500
+  title: Internal Server Error
+  meaning: An unexpected server-side failure.
+  remediation: Retry with backoff; if persistent, contact Red Canary support.
+- status: 503
+  title: Service Unavailable
+  meaning: The API is temporarily unavailable.
+  remediation: Retry with backoff and check https://status.redcanary.com/.
+gaps:
+  - No RFC 9457 problem+json support.
+  - No documented per-error code registry or stable error `type` URIs.
+  - No documented Retry-After or RateLimit-* headers on 429/406.
+  - 403 is overloaded for both unauthenticated and unauthorized cases.
+x-evidence:
+  fetched: '2026-08-05'
+  urls:
+  - url: https://docs.redcanary.com/docs/red-canary-rest-api.md
+    http_status: 200
+  - url: https://docs.redcanary.com/docs/rest-api-faq.md
+    http_status: 200
