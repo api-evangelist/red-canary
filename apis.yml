@@ -16,7 +16,7 @@ image: https://redcanary.com/wp-content/uploads/2025/08/Open-Graph-2025-1200x628
 url: https://raw.githubusercontent.com/api-evangelist/red-canary/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-08-05'
 modified: '2026-08-05'
 tags:
