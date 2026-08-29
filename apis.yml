@@ -12,6 +12,17 @@ description: 'Red Canary is a Managed Detection and Response (MDR) provider that
   investigations and audit logs, authenticated with a per-user X-Api-Key token; the
   Swagger/OpenAPI reference for that API is served inside the customer portal and is
   not reachable without a tenant subdomain and login.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://redcanary.com/wp-content/uploads/2025/08/Open-Graph-2025-1200x628-1.jpg
 url: https://raw.githubusercontent.com/api-evangelist/red-canary/refs/heads/main/apis.yml
 x-type: company
