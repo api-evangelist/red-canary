@@ -78,6 +78,11 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: ParentCompany
+  url: https://apis.io/providers/zscaler/
+  name: Zscaler
+  x-relationship: acquired
+  x-evidence: "Red Canary was acquired by Zscaler in 2025."
 - type: Website
   url: https://redcanary.com/
 - type: DeveloperPortal
