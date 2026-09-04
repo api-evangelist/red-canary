@@ -23,6 +23,19 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source:
+  - authentication
+  - security
+  generated: '2026-09-03'
+  method: derived
 image: https://redcanary.com/wp-content/uploads/2025/08/Open-Graph-2025-1200x628-1.jpg
 url: https://raw.githubusercontent.com/api-evangelist/red-canary/refs/heads/main/apis.yml
 x-type: company
