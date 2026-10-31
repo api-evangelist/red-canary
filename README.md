@@ -64,5 +64,100 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Red Canary is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/red-canary_stock/
+Red Canary is a Managed Detection and Response (MDR) provider that monitors endpoint, identity, cloud, email and network telemetry on behalf of its customers, confirms threats with a 24x7 human and AI detection engineering team, and drives containment through automation playbooks and response actions across partner platforms such as Microsoft Defender, CrowdStrike Falcon, SentinelOne, Palo Alto Cortex, Carbon Black and Zscaler. The company also publishes widely used open-source security research including Atomic Red Team, Chain Reactor, Surveyor and the annual Threat Detection Report. Red Canary was acquired by Zscaler in 2025. It operates a tenant-scoped REST API (openapi/v3) over detections, threats, events, endpoints, endpoint users, identities, investigations and audit logs, authenticated with a per-user X-Api-Key token; the Swagger/OpenAPI reference for that API is served inside the customer portal and is not reachable without a tenant subdomain and login.
+
+**Areas:** Company · Security · Cybersecurity · Managed Detection and Response · Threat Detection · Threat Intelligence · Endpoint Security · Incident Response · Security Operations · Automation
+
+## Red Canary on APIs.io
+
+Everything profiled for Red Canary is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/red-canary/](https://apis.io/providers/red-canary/)** — or go straight to one of the APIs or properties below.
+
+### APIs (1)
+
+- [Red Canary REST API v3](https://apis.io/apis/red-canary/red-canary-rest-api-v3/) — Tenant-scoped REST API over the Red Canary portal. Documented resources include detections, threats, events, endpoints, endpoint_users, identities,…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Red Canary Authentication](https://apis.io/security/red-canary/red-canary-authentication/)
+- [Red Canary Domain Security](https://apis.io/security/red-canary/red-canary-domain-security/)
+- [Red Canary Trust Center](https://apis.io/security/red-canary/red-canary-trust-center/)
+- [Red Canary Vulnerability Disclosure](https://apis.io/security/red-canary/red-canary-vulnerability-disclosure/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://redcanary.com/)
+- [Documentation](https://docs.redcanary.com/docs/red-canary-getting-started)
+- [Getting started](https://docs.redcanary.com/docs/red-canary-rest-api)
+- [API reference](https://go.my.redcanary.co/openapi/v3/docs/index.html)
+- [Support](https://support.redcanary.com/hc/en-us)
+- [Changelog](https://docs.redcanary.com/docs/red-canary-release-notes)
+- [Blog](https://redcanary.com/blog/)
+- [Security](https://redcanary.com/responsible-disclosure/)
+- [Compliance](https://redcanary.com/trust-center/)
+- [Terms of service](https://redcanary.com/license-agreements/)
+- [Privacy policy](https://redcanary.com/privacy-policy/)
+- [GitHub](https://github.com/redcanaryco)
+- [Status](https://status.redcanary.com/)
+
+## API Evangelist rating
+
+**Kin Score 40.9** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 52.6 |
+| Developer ergonomics | 64.3 |
+| Access clarity | 43.4 |
+
+**Agent readiness 5.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 35.3** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/red-canary/](https://apis.io/providers/red-canary/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Red Canary: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/red-canary/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
